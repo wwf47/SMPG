@@ -20,7 +20,7 @@ def findpath(graph, seed, node, simrang, x):
             rel1.append(j)
             for k in node[int(i)][j]:#get target nid(list)
                 for m in node[int(k)].keys():#get relid
-                    #添加关系路径
+                    #add relation path
                     if j+'_'+m not in link[int(i)].keys():
                         rel2.append(j+'_'+m)
                         link[int(i)][j+'_'+m] = []
