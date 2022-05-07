@@ -1,10 +1,12 @@
+from tqdm import tqdm
+
 class Node:
     def __init__(self, nid, name):  # construction method,initialize
         self.nid = nid
         self.name = name
         self.corrlink = []
         self.nodetype = []
-    def setno(self, nid):
+    def setid(self, nid):
         self.nid = nid
     def setname(self, name):
         self.name = name
@@ -12,7 +14,7 @@ class Node:
         self.nodetype.append(ty)
     def appendcorrlink(self, link):
         self.corrlink.append(link)
-    def getno(self):
+    def getid(self):
         return self.nid
     def getname(self):
         return self.name
@@ -30,25 +32,43 @@ def build_graph():
     type_set = {}
     node_set = {}
 
-    print("begin to load typeset")
-
     with open("./data/yago/Type-NodeTable.txt", "r") as f:
-        for line in f.readlines():
+        for line in tqdm(f.readlines(), desc="Typeset"):
             if line == '\n':
                 continue
             tmp = line.strip().split('-')
             type_set[int(tmp[1])] = tmp[0].strip()
-    print("load typeset finished")
 
     with open("./data/yago/NodeNames.txt", "r") as f:
         cont = 0
-        for line in f.readlines():
+        for line in tqdm(f.readlines(), desc="Nodeset"):
             node = Node(2, 'wwf')
             cont += 1
             if cont%200000==0:
                 print(cont)
-            if line == '\n':
-                continue
+            tmp = line.strip().split('\t')
+            node.setid(int(tmp[0]))
+            node.setname(tmp[1])
+            tp = type_set.get(int(tmp[0]))#get the type of node
+            for t in tp.split(' '):
+                node.appendtype(int(t))
+            node_set[int(tmp[0])] = node
+
+    cont = 0
+    with open("./data/yago/onlyRecords.txt", "r") as f:
+        for line in tqdm(f.readlines(), desc="Triple records"):
+            cont += 1
+            if cont%500000 == 0:
+                print(cont)
             tmp = line.strip().split('-')
-            type_set[int(tmp[1])] = tmp[0].strip()
-    print("load typeset finished")
+            rel = node_set.get(int(tmp[0]))
+            rel.appendcorrlink(tmp[0]+'_'+tmp[1]+'_'+tmp[2])
+            revrel = node_set.get(int(tmp[2]))
+            revrel.appendcorrlink(tmp[2]+'_'+'-'+tmp[1]+"_"+tmp[0])
+    print("graph completed")
+    return node_set
+
+if __name__ == '__main__':
+    node = build_graph()
+    print(len(node))
+
