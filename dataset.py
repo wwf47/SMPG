@@ -1,4 +1,3 @@
-
 def get_seeds(data_dir, seeds):
     pos = []
     can = []
@@ -46,11 +45,23 @@ def get_links(data_dir):
     print("the length of triple:" + str(len(rec)))
     return linkdict, linkst, rec
 
+def get_node(graph):
 
-
+    nodelink = {}  # key is node and value is dict(key is link connecting node and value is node )
+    for i in graph.keys():
+        rel = {}#key is relid and value is list of target node
+        for j in graph[i].getcorrlink():
+            arr = j.strip().split('_')
+            if arr[1] not in rel.keys():
+                rel[arr[1]] = []
+            rel[arr[1]].append(arr[2])
+        nodelink[i] = rel
+    print("the length of node:" + str(len(nodelink)))
+    return nodelink
 
 if __name__ == '__main__':
     data_dir = "data/seed"
     seeds = "demo"
     p, c = get_seeds(data_dir, seeds)
     a, b, d = get_links("data/yago")
+    node = get_node()
