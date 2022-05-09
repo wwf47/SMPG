@@ -1,17 +1,14 @@
 import time
-import random
 import collections
-from fractions import Fraction
 
-def findpath(graph, seed, node, simrang, x):
+def findpath(seed, node, simrang, x):
     node_rel1 = {}#key is nid, value is rel dict
     node_rel2 = {}#key is nid, value is relation path
     rel1 = []
     rel2 = []
     link = {}
     path = {}#key is path, value is number of (source,target)
-    path_weight = {}
-    start_time = time.time()
+    time0 = time.time()
     for i in seed:
         link[int(i)] = {}
         node_rel1[int(i)] = node[int(i)]
@@ -20,7 +17,7 @@ def findpath(graph, seed, node, simrang, x):
             rel1.append(j)
             for k in node[int(i)][j]:#get target nid(list)
                 for m in node[int(k)].keys():#get relid
-                    #add relation path
+                    #添加关系路径
                     if j+'_'+m not in link[int(i)].keys():
                         rel2.append(j+'_'+m)
                         link[int(i)][j+'_'+m] = []
@@ -60,7 +57,7 @@ def findpath(graph, seed, node, simrang, x):
                     path[j] = len(inter)
                 else:
                     path[j] = path[j] + len(inter)
-    time0 = time.time()
+    time2 = time.time()
     for k in node_rel1.keys():
         for m in node_rel1[k].keys():
             for i in node_rel2.keys():
@@ -75,9 +72,10 @@ def findpath(graph, seed, node, simrang, x):
                             else:
                                 path[j+'_'+rev] = path[j+'_'+rev] + 1
 
-    time1 = time.time()
-    print(f"time of finding length-3 path: {time1-time0}")
+    time3 = time.time()
+    print(f"time of finding length-3 path: {time3-time2}")
 
+    #add length-4 path
     for i in range(1, x+1):
         for j in range(1, x+1):
             if i!=j:
@@ -85,8 +83,41 @@ def findpath(graph, seed, node, simrang, x):
                     for rk in node_rel2[int(seed[j-1])].keys():
                         inter = set(node_rel2[int(seed[i-1])][rm])-set(node_rel2[int(seed[j-1])][rk])-set(seed)
                         if len(inter)!=0:
-                            print(inter)
-                            
+                            #print(inter)
+                            r = rk.strip().split('_')
+                            opp1 = str(0-int(r[1]))
+                            opp2 = str(0-int(r[0]))
+                            p4 = rm + '_' + opp1 + '_' + opp2
+                            #print(p4)
+                            if p4 not in path.keys():
+                                path[p4] = 1
+                            else:
+                                path[p4] = path[p4]+1
+    time4 = time.time()
+    print(f"time of finding length-4 path: {time4-time3}")
+
+    end_time = time4-time0
+    print(f"time of finding meta path: {time4-time0}")
+
+    sum = 0
+    path_weight = {}#key is path, value is weight
+    for p in path.keys():
+        if path[p]>=simrang:
+            sum += path[p]
+            path_weight[p] = path[p]
+    for p in path_weight.keys():
+        path_weight[p] = path_weight[p]/sum
+    print("the meta path with weight is: ")
+    print(len(path_weight))
+    return path_weight, len(path_weight), end_time
+
+
+
+
+
+
+
+
 
 
 
