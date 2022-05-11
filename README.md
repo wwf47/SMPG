@@ -41,4 +41,6 @@ This method show in `get_candidate.py`. It is used to obtain the candidates base
 * Step 4 extracts candidate entities satisfying the ultimate candidates types.
 
 ### Seed-Based Meta Path Generation
-    
+<p align="center">
+  <img src="https://github.com/wwf47/SMPG/blob/main/path.jpg"/ width=600>
+</p>    
