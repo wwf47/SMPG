@@ -1,3 +1,5 @@
+from model.get_graph import build_graph
+
 def get_seeds(data_dir, seeds):
     pos = []
     can = []
@@ -17,7 +19,7 @@ def get_seeds(data_dir, seeds):
 def get_links(data_dir):
     linkdict = {}#key is link and value is sourced node,all keys include link 8 and link -8
     linkst = {}# key is link and value is dict(key is source node of link ,value is target node of link)
-    ref = f"{data_dir}/onlyRecords.txt"
+    ref = f"{data_dir}/records.txt"
     rec = []
     with open(ref, "r") as f:
         for line in f.readlines():
@@ -60,7 +62,8 @@ def get_node(graph):
 
 if __name__ == '__main__':
     data_dir = "data/seed"
-    seeds = "demo"
+    seeds = "actor"
     p, c = get_seeds(data_dir, seeds)
-    a, b, d = get_links("data/yago")
-    node = get_node()
+    a, b, d = get_links("data/test")
+    graph = build_graph("data/test")
+    node = get_node(graph)

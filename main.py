@@ -25,7 +25,7 @@ if __name__=='__main__':
     args = init_args()
     pos, can = get_seeds("data/seed", args.seed)
     rel, rel_st, triple = get_links("data/yago")
-    graph = build_graph()
+    graph = build_graph("data/yago")
     node = get_node(graph)
     x = 2#seed number
     value = x * (x - 1) / 2 + 1#predefined threshold value
