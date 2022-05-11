@@ -12,9 +12,6 @@ def findpath(seed, node, value, x):
     for i in seed:
         link[int(i)] = {}
         node_rel1[int(i)] = node[int(i)]
-        #print("node is")
-        #print(node[int(i)])
-        #print("the link related to node is: "+str(len(node[int(i)])))
         for j in node[int(i)]:#get relid(dict)
             rel1.append(j)
             for k in node[int(i)][j]:#get target nid(list)
@@ -104,7 +101,6 @@ def findpath(seed, node, value, x):
     path_weight = {}#key is path, value is weight
     for p in path:
         if path[p]>=value:
-            #print("p is :"+p)
             sum += path[p]
             path_weight[p] = path[p]
     for p in path_weight:

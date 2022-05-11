@@ -29,7 +29,8 @@ def get_order(path_weight, seed, can, x, rel, rel_st, triple, start, end, pma):
         canord[can[i]] = cs
 
     orderlist = sorted(canord.items(), key=lambda x:x[1], reverse=True)
-    return orderlist, pma, start, end
+    print(orderlist)
+    return orderlist, start, end
 
 
 
