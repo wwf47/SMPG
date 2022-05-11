@@ -27,6 +27,9 @@ The codebase is implemented in Python 3.6. Required packages are:
     
 ## The Proposed Method
 ### Candidate Entities Extraction
+<p align="center">
+  <img src="https://github.com/wwf47/SMPG/blob/main/candidate.jpg"/ width=200>
+</p>
 This method show in get_candidate.py. It is used to obtain the candidates based on the seeds.
 * Step 1 obtains entity types of each seed. 
 * Step 2 generates the initial common candidates types by the intersection operation. 
