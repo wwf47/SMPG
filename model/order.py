@@ -10,14 +10,11 @@ def get_order(path_weight, seed, can, x, rel, rel_st, triple, start, end, pma):
     for i in trange(len(can), desc="candidate"):#candidate
         cantmp = 0
         for j in range(x):#seed
-            for k in path_weight.keys():
-                print("\nget_path")
+            for k in path_weight:
                 flag = 0#path contains candidate and seed or not
                 seedtmp = 0
                 if k not in pma:
-                    print("k not in pma")
                     matrix = pathmatrix(k, merge, seed_set, rel, rel_st, triple)
-                    print("get matrix")
                     start[k] = matrix[0]#startlist
                     end[k] = matrix[1]#endlist
                     pma[k] = matrix[2]#matrix

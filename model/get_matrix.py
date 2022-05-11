@@ -1,30 +1,29 @@
 import numpy as np
 
-
 def pathmatrix(path, merge, seed, rel, rel_st, triple):#rel key is relid, value is source
     set2 = set()
     triple = triple[:100]
     tmp = path.strip().split('_')
     list1 = list(set(rel[tmp[0]]) & seed)#source node
-    print(f"length of list1: {len(list1)}")
+    #print(f"length of list1: {len(list1)}")
     for si in list1:
         set2 = set(rel_st[tmp[0]][si]) | set2#target
     list2 = list(set2 & set(rel[tmp[1]]))#second node
-    print(f"length of list2: {len(list2)}")
+    #print(f"length of list2: {len(list2)}")
 
     if len(tmp) == 2:#path length is 2
-        print(f"path length is {len(tmp)}")
+        #print(f"path length is {len(tmp)}")
         list3 = []
         for k2 in list2:
             list3.extend(rel_st[tmp[1]][k2])#third node
         list3 = list(set(list3) & merge)#belong to seed and candidate
-        print(f"length of list3: {len(list3)}")
+        #print(f"length of list3: {len(list3)}")
         m1 = np.zeros([len(list1), len(list2)])
         for i in range(len(list1)):
             for j in range(len(list2)):
                 if (list1[i]+'_'+tmp[0]+'_'+list2[j]) in triple:
                     m1[i][j] = 1
-                    print(f"{str(i)},{str(j)}")
+                    #print(f"{str(i)},{str(j)}")
                     break
         m2 = np.zeros([len(list2), len(list3)])
         for i in range(len(list2)):
@@ -65,7 +64,7 @@ def pathmatrix(path, merge, seed, rel, rel_st, triple):#rel key is relid, value 
         return list1, list4, matrix
 
     if len(tmp) == 4:#path length is 3
-        print(f"path length is {len(tmp)}")
+        #print(f"path length is {len(tmp)}")
         list3 = []
         list4 = []
         list5 = []
