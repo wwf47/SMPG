@@ -7,27 +7,21 @@ This codebase contains implementation of the paper:
 > [[Paper]](https://link.springer.com/chapter/10.1007/978-3-319-57454-7_25)
 
 ## Test samples
--------
 <p align="center">
   <img src="https://github.com/wwf47/SMPG/blob/main/test.jpg"/ width=200>
 </p>
 
 ## Running a model
-
 To run the model, execute the following command:
-
      python main.py --seed_dir actor --seed_num 2 
-Available datasets are:
-    
+Available datasets are:    
     actor
     software
     movie
     scientist
  
 ## Requirements
-
 The codebase is implemented in Python 3.6. Required packages are:
-
     numpy    1.19.5
     tqdm     4.62.3
     
