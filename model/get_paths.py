@@ -1,30 +1,31 @@
 import time
 import collections
 
-def findpath(seed, node, value, x):
+def findpath(seed, node, simrang, x):
     node_rel1 = {}#key is nid, value is rel dict
     node_rel2 = {}#key is nid, value is relation path
     rel1 = []
     rel2 = []
     link = {}#key is nodeid,
-    path = {}#key is path, value is number of seed pair
+    path = {}#key is path, value is number of (source,target)
     time0 = time.time()
     for i in seed:
         link[int(i)] = {}
         node_rel1[int(i)] = node[int(i)]
-        #print("node is")
-        #print(node[int(i)])
-        #print("the link related to node is: "+str(len(node[int(i)])))
-        for j in node[int(i)]:#get relid(dict)
+        print("the link related to node is: "+str(len(node[int(i)].keys())))
+        for j in node[int(i)].keys():#get relid(dictk)
             rel1.append(j)
             for k in node[int(i)][j]:#get target nid(list)
-                for m in node[int(k)]:#get relid
-                    #add relation
-                    if j+'_'+m not in link[int(i)]:
+                for m in node[int(k)].keys():#get relid
+                    #添加关系路径
+                    if j+'_'+m not in link[int(i)].keys():
                         rel2.append(j+'_'+m)
                         link[int(i)][j+'_'+m] = []
                     link[int(i)][j+'_'+m] = link[int(i)][j+'_'+m]+node[int(k)][m]#get next relation related nodes
         node_rel2[int(i)] = link[int(i)]
+        print('the dictionary of relation with length 2 has been built,the number is:')
+    for s in seed:
+        print(len(link[int(s)].keys()))
 
     #record the seed count of each 1-relation contains
     d1 = collections.Counter(rel1)
@@ -32,8 +33,8 @@ def findpath(seed, node, value, x):
     d2 = collections.Counter(rel2)
     rel2_num = dict(d2)
 
-    print("origin: the number of relation with length 1:"+str(len(rel1)))
-    print("origin: the number of relation with length 2:"+str(len(rel2)))
+    print("origin: the number of relation with length 1:"+str(len(node_rel1)))
+    print("origin: the number of relation with length 2:"+str(len(node_rel2)))
 
     #maximum number of source set
     #delete not frequent relation
@@ -41,37 +42,39 @@ def findpath(seed, node, value, x):
         for j in list(node_rel1[i]):#get rel dict
             if rel1_num[j]<x:#don't have enough source node
                 node_rel1[i].pop(j)
-                rel1.remove(j)
-    for i in node_rel2:#get node dict
-        for j in node_rel2[i]:#get rel dict
+    for i in list(node_rel2):#get node dict
+        for j in list(node_rel2[i]):#get rel dict
             if rel2_num[j]<x-1:#don't have enough source node
                 node_rel2[i].pop(j)
-                rel2.remove(j)
-    print("delete: the number of relation with length 1:" + str(len(rel1)))
-    print("delete: the number of relation with length 2:" + str(len(rel2)))
+    print("delete: the number of relation with length 1:" + str(len(node_rel1)))
+    print("delete: the number of relation with length 2:" + str(len(node_rel2)))
 
     for i in node_rel2:#get nodeid
         for j in node_rel2[i]:#get rel dict
-            inter = (set(seed) & set(node_rel2[i][j]))-set([str(i)])#get the number of elements of the intersection
+            inter = (set(seed) & set(node_rel2[i][j])) - set([i])#get the number of elements of the intersection
             if len(inter)!=0:
-                if j not in path:
+                if j not in path.keys():
                     path[j] = len(inter)
                 else:
                     path[j] = path[j] + len(inter)
     print(f"number of path: {len(path)}")
     time2 = time.time()
-    for k in node_rel1:
-        for m in node_rel1[k]:
-            for i in node_rel2:
-                for j in node_rel2[i]:
-                    if k!=i:#relation 1 vs relation 2 has different source node
-                        inter = set(node_rel1[k][m]) & set(node_rel2[i][j]) - set(seed)#get target intersection
-                        if len(inter)!=0:
-                            rev = str(0-int(m))
-                            if j+'_'+rev not in path:
-                                path[j+'_'+rev] = 1
-                            else:
-                                path[j+'_'+rev] = path[j+'_'+rev] + 1
+    for k,m in node_rel1.items():
+        for i,j in node_rel2.items():
+            if k != i:  # relation 1 vs relation 2 has different source node
+                inter = set(m.values()) & set(j.values()) - set(seed)  # get target intersection
+                if len(inter) != 0:
+                    print(inter)
+                    for r in m:
+                        rev = str(0 - int(r))
+                        if j + '_' + rev not in path:
+                            path[j + '_' + rev] = 1
+                        else:
+                            path[j + '_' + rev] = path[j + '_' + rev] + 1
+
+
+
+
 
     time3 = time.time()
     print(f"time of finding length-3 path: {time3-time2}")
@@ -81,15 +84,17 @@ def findpath(seed, node, value, x):
     for i in range(1, x+1):
         for j in range(1, x+1):
             if i!=j:
-                for rm in node_rel2[int(seed[i-1])]:#get relid
-                    for rk in node_rel2[int(seed[j-1])]:
-                        inter = set(node_rel2[int(seed[i-1])][rm])&set(node_rel2[int(seed[j-1])][rk])-set(seed)
+                for rm in node_rel2[int(seed[i-1])].keys():#get relid
+                    for rk in node_rel2[int(seed[j-1])].keys():
+                        inter = set(node_rel2[int(seed[i-1])][rm])-set(node_rel2[int(seed[j-1])][rk])-set(seed)
                         if len(inter)!=0:
+                            #print(inter)
                             r = rk.strip().split('_')
                             opp1 = str(0-int(r[1]))
                             opp2 = str(0-int(r[0]))
                             p4 = rm + '_' + opp1 + '_' + opp2
-                            if p4 not in path:
+                            #print(p4)
+                            if p4 not in path.keys():
                                 path[p4] = 1
                             else:
                                 path[p4] = path[p4]+1
@@ -100,16 +105,16 @@ def findpath(seed, node, value, x):
     end_time = time4-time0
     print(f"time of finding meta path: {time4-time0}")
 
-    sum = 0#sum of seed pairs
+    sum = 0
     path_weight = {}#key is path, value is weight
-    for p in path:
-        if path[p]>=value:
-            #print("p is :"+p)
+    for p in path.keys():
+        if path[p]>=simrang:
             sum += path[p]
             path_weight[p] = path[p]
-    for p in path_weight:
+    for p in path_weight.keys():
         path_weight[p] = path_weight[p]/sum
-    print(f"the length of meta path with weight is: {len(path_weight)}")
+    print("the meta path with weight is: ")
+    print(len(path_weight))
     return path_weight, len(path_weight), end_time
 
 
