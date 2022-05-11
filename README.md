@@ -44,3 +44,10 @@ This method show in `get_candidate.py`. It is used to obtain the candidates base
 <p align="center">
   <img src="https://github.com/wwf47/SMPG/blob/main/path.jpg"/ width=600>
 </p>    
+```
+Input: Knowledge graph G, seed set S = {s1, s2,...,sm}.
+Output: The set of meta paths P , seed pairs SP that each meta path connects.
+Create the root node of the tree T ; 2 sl ⇐ link types set;//the link needs connect 2 seeds or more
+while T can be expanded do
+  N ⇐ tree nodes with the maximum number of source set in T ;
+  n ⇐ tree node with the minimum number of tuples in N;
