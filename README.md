@@ -9,5 +9,5 @@ This codebase contains implementation of the paper:
 Test samples
 -------
 <p align="center">
-  <img src="https://github.com/wwf47/SMPG/blob/main/test.jpg"/ width=100>
+  <img src="https://github.com/wwf47/SMPG/blob/main/test.jpg"/ width=200>
 </p>
