@@ -5,3 +5,8 @@ This codebase contains implementation of the paper:
 > Pacific-Asia conference on knowledge discovery and data mining. 
 > Springer, Cham, 2017.
 > [[Paper]](https://link.springer.com/chapter/10.1007/978-3-319-57454-7_25)
+
+Test samples
+-------
+![]
+(https:github.com/wwf47/SMPG/test.jpg)
