@@ -12,12 +12,12 @@ def eval(order, pos):#(candidate, probability)
             order_set.add(c)
     for i in range(30):
         if order[i][0] in pos:
-            prec30 += 1
-            P30 = Fraction(prec30, (i+1))+P30
+            prec30 += 1#correct
+            P30 = Fraction(prec30, (i+1))+P30#pre@i
     if prec30 == 0:
         AP30 = 0
     else:
-        AP30 = P30/prec30
+        AP30 = P30/prec30#sum of pre@i/correct instances
     for i in range(30,60):
         if order[i][0] in pos:
             prec60 += 1
@@ -38,7 +38,7 @@ def eval(order, pos):#(candidate, probability)
         AP90 = (P90+P60+P30)/prec90
     MAP = (AP30+AP60+AP90)/3
 
-    prec30 /= float(30)
+    prec30 /= float(30)#pre@30/num
     prec60 /= float(60)
     prec90 /= float(90)
 

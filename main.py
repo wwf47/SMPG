@@ -1,6 +1,5 @@
-from model.get_graph import Node, build_graph
+from model.get_graph import build_graph
 import numpy as np
-import random
 from tqdm import tqdm, trange
 import os
 from argparse import ArgumentParser
@@ -13,9 +12,6 @@ def init_args():
     parser = ArgumentParser()
     parser.add_argument("--seed", default="actor", type=str)
     args = parser.parse_args()
-
-    kg = f"./data/yago/onlyRecords.txt"
-    args.kg = kg
 
     out_dir = f"./outputs"
     if not os.path.exists(out_dir):
@@ -31,13 +27,10 @@ if __name__=='__main__':
     rel, rel_st, triple = get_links("data/yago")
     graph = build_graph()
     node = get_node(graph)
-    x = 2
-    simrang = x * (x - 1) / 2 + 1
+    x = 2#seed number
+    value = x * (x - 1) / 2 + 1#predefined threshold value
 
     i, flag = 0, 2
-    seedcom = []
-    seedpath = {}
-    seedtime = {}
     sum_time = 0
     start = {}
     end = {}
@@ -48,17 +41,10 @@ if __name__=='__main__':
     MAP = []
     endset = set()
 
-    for i in trange(len(pos)-flag+1, desc="positive"):
-        seed = []
-        seed.append(pos[i])
-        seed.append(pos[i+1])
-        tmp = pos[i]+'-'+pos[i+1]
-        seedcom.append(pos[i]+'-'+pos[i+1])
+    for i in range(len(pos)-flag+1):
+        seed = (pos[i:i+2])
         print("######Begin to get metapath and weight######")
-        pw = findpath(seed, node, simrang, x)
-        seedpath[tmp] = pw[0]
-        seedtime[tmp] = pw[2]
-        sum_time += pw[2]
+        pw = findpath(seed, node, value, x)
         print("######Begin to order the candidates######")
         order, pma, s1, e1 = get_order(pw[0], seed, can, x, rel, rel_st, triple, start, end, pma)
         res = eval(order, pos)
@@ -67,7 +53,6 @@ if __name__=='__main__':
         p3.append(res[2])
         MAP.append(res[3])
         endset = endset|res[4]
-
         i += x
     prenum = len(endset & set(pos))
 

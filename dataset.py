@@ -24,18 +24,18 @@ def get_links(data_dir):
             tmp = line.strip().split("-")
             rec.append(tmp[0]+"_"+tmp[1]+"_"+tmp[2])
             rec.append(tmp[2]+"_"+"-"+tmp[1]+"_"+tmp[2])
-            if tmp[1] not in linkdict.keys():
+            if tmp[1] not in linkdict:
                 linkdict[tmp[1]] = []
             linkdict[tmp[1]].append(tmp[0])
-            if '-'+tmp[1] not in linkdict.keys():
+            if '-'+tmp[1] not in linkdict:
                 linkdict['-'+tmp[1]] = []
             linkdict['-'+tmp[1]].append(tmp[2])
-            if tmp[1] not in linkst.keys():
+            if tmp[1] not in linkst:
                 linkst[tmp[1]] = {}
             if tmp[0] not in linkst[tmp[1]]:
                 linkst[tmp[1]][tmp[0]] = []
             linkst[tmp[1]][tmp[0]].append(tmp[2])
-            if '-'+tmp[1] not in linkst.keys():
+            if '-'+tmp[1] not in linkst:
                 linkst['-'+tmp[1]] = {}
             if tmp[2] not in linkst['-'+tmp[1]]:
                 linkst['-'+tmp[1]][tmp[2]] = []
@@ -46,13 +46,12 @@ def get_links(data_dir):
     return linkdict, linkst, rec
 
 def get_node(graph):
-
     nodelink = {}  # key is node and value is dict(key is link connecting node and value is node )
-    for i in graph.keys():
+    for i in graph:
         rel = {}#key is relid and value is list of target node
         for j in graph[i].getcorrlink():
             arr = j.strip().split('_')
-            if arr[1] not in rel.keys():
+            if arr[1] not in rel:
                 rel[arr[1]] = []
             rel[arr[1]].append(arr[2])
         nodelink[i] = rel
