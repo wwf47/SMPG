@@ -13,7 +13,8 @@ This codebase contains implementation of the paper:
 
 ## Running a model
 To run the model, execute the following command:
-     python main.py --seed_dir actor --seed_num 2 
+    $ python main.py --seed_dir actor --seed_num 2 
+     
 Available datasets are:    
     actor
     software
@@ -22,6 +23,7 @@ Available datasets are:
  
 ## Requirements
 The codebase is implemented in Python 3.6. Required packages are:
+
     numpy    1.19.5
     tqdm     4.62.3
     
