@@ -8,7 +8,7 @@ with open("./seed/actor/positive.txt", "r") as f:
 with open("./yago/Type-NodeTable.txt", "r") as f:
     for line in f.readlines():
         t = line.strip().split("-")
-        if t[1] not in typ.keys():
+        if t[1] not in typ:
             typ[t[1]] = []
             typ[t[1]].extend(t[0].split(' '))
 ts = typ[pos[0]]
@@ -39,7 +39,7 @@ with open("./yago/concept.txt", "r") as f:
     for line in f.readlines():
         t = line.strip().split('\t')
         if t[1] in typename:
-            if (int(typename.index(t[1])+1)) not in concept.keys():
+            if (int(typename.index(t[1])+1)) not in concept:
                 concept[int(typename.index(t[1])+1)] = []
             if t[0] in typename:
                 concept[int(typename.index(t[1])+1)].append(int(typename.index(t[0])+1))
