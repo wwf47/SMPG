@@ -43,7 +43,8 @@ This method show in `get_candidate.py`. It is used to obtain the candidates base
 ### Seed-Based Meta Path Generation
 <p align="center">
   <img src="https://github.com/wwf47/SMPG/blob/main/path.jpg"/ width=600>
-</p>    
+</p>  
+
 ```
 Input: Knowledge graph G, seed set S = {s1, s2,...,sm}.
 Output: The set of meta paths P , seed pairs SP that each meta path connects.
