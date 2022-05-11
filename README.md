@@ -8,6 +8,6 @@ This codebase contains implementation of the paper:
 
 Test samples
 -------
-<p align="center">
-  <img src="https:github.com/wwf47/SMPG/ram/master/test.jpg" width=400>
-</p>
+![]
+(https:github.com/wwf47/SMPG/ram/master/test.jpg)
+
