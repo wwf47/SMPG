@@ -46,7 +46,7 @@ if __name__=='__main__':
         print("######Begin to get metapath and weight######")
         pw = findpath(seed, node, value, x)
         print("######Begin to order the candidates######")
-        order, pma, s1, e1 = get_order(pw[0], seed, can, x, rel, rel_st, triple, start, end, pma)
+        order, s1, e1 = get_order(pw[0], seed, can, x, rel, rel_st, triple, start, end, pma)
         res = eval(order, pos)
         p1.append(res[0])
         p2.append(res[1])

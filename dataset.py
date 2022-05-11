@@ -25,7 +25,7 @@ def get_links(data_dir):
         for line in f.readlines():
             tmp = line.strip().split("-")
             rec.append(tmp[0]+"_"+tmp[1]+"_"+tmp[2])
-            rec.append(tmp[2]+"_"+"-"+tmp[1]+"_"+tmp[2])
+            rec.append(tmp[2]+"_"+"-"+tmp[1]+"_"+tmp[0])
             if tmp[1] not in linkdict:
                 linkdict[tmp[1]] = []
             linkdict[tmp[1]].append(tmp[0])
@@ -57,13 +57,13 @@ def get_node(graph):
                 rel[arr[1]] = []
             rel[arr[1]].append(arr[2])
         nodelink[i] = rel
-    print("the length of node:" + str(len(nodelink)))
+    #print("the length of node:" + str(len(nodelink)))
     return nodelink
 
 if __name__ == '__main__':
-    data_dir = "data/seed"
+    data_dir = "data/test"
     seeds = "actor"
-    p, c = get_seeds(data_dir, seeds)
-    a, b, d = get_links("data/test")
-    graph = build_graph("data/test")
+    #p, c = get_seeds(data_dir, seeds)
+    a, b, d = get_links(data_dir)
+    graph = build_graph(data_dir)
     node = get_node(graph)
