@@ -32,6 +32,7 @@ The codebase is implemented in Python 3.6. Required packages are:
 <p align="center">
   <img src="https://github.com/wwf47/SMPG/blob/main/candidate.jpg"/ width=600>
 </p>
+
 This method show in `M` `get_candidate.py`. It is used to obtain the candidates based on the seeds.
 * Step 1 obtains entity types of each seed. 
 * Step 2 generates the initial common candidates types by the intersection operation. 
