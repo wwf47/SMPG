@@ -15,7 +15,8 @@ This codebase contains implementation of the paper:
 To run the model, execute the following command:
     $ python main.py --seed_dir actor --seed_num 2 
      
-Available datasets are:    
+Available datasets are:
+
     actor
     software
     movie
