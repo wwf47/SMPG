@@ -8,5 +8,5 @@ This codebase contains implementation of the paper:
 
 Test samples
 -------
-![test.jpg](https:github.com/wwf47/SMPG/ram/master/test.jpg)
+![test](https://github.com/wwf47/SMPG/blob/main/test.jpg)
 
