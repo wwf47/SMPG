@@ -8,7 +8,7 @@ This codebase contains implementation of the paper:
 
 ## Test samples
 <p align="center">
-  <img src="https://github.com/wwf47/SMPG/blob/main/test.jpg"/ width=200>
+  <img src="https://github.com/wwf47/SMPG/blob/main/figure/test.jpg"/ width=200>
 </p>
 
 ## Running a model
@@ -31,7 +31,7 @@ The codebase is implemented in Python 3.6. Required packages are:
 ## The Proposed Method
 ### Candidate Entities Extraction
 <p align="center">
-  <img src="https://github.com/wwf47/SMPG/blob/main/candidate.jpg"/ width=600>
+  <img src="https://github.com/wwf47/SMPG/blob/main/figure/candidate.jpg"/ width=600>
 </p>
 
 This method show in `get_candidate.py`. It is used to obtain the candidates based on the seeds.
@@ -42,7 +42,7 @@ This method show in `get_candidate.py`. It is used to obtain the candidates base
 
 ### Seed-Based Meta Path Generation
 <p align="center">
-  <img src="https://github.com/wwf47/SMPG/blob/main/path.jpg"/ width=600>
+  <img src="https://github.com/wwf47/SMPG/blob/main/figure/path.jpg"/ width=600>
 </p>  
 
 ### Combination of Meta Path
