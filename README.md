@@ -8,5 +8,6 @@ This codebase contains implementation of the paper:
 
 Test samples
 -------
-![test](https://github.com/wwf47/SMPG/blob/main/test.jpg)
-
+<p align="center">
+  <img src="https://github.com/wwf47/SMPG/blob/main/test.jpg"/ width=400>
+</p>
