@@ -47,4 +47,5 @@ This method show in `get_candidate.py`. It is used to obtain the candidates base
 
 ### Combination of Meta Path
 
-SMPG discovers the important meta paths P, but the importance of each meta path is different for the further entity set expansion and it is related to the number of seed pairs that meta paths connect. More seed pairs the meta path connects, the more important it is.
+* Get the weight of meta path using heuristic weight learning method.
+* combine meta paths to get the following ranking model.
