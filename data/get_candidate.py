@@ -1,10 +1,11 @@
 pos = []
-typ= {}
-#obtain initial candidate types
+typ = {}#key is entity index, value is type(in KG)
+#obtain entity types of each seed
 with open("./seed/actor/positive.txt", "r") as f:
     for line in f.readlines():
         t = line.strip()
         pos.append(t)
+#type-entity
 with open("./yago/Type-NodeTable.txt", "r") as f:
     for line in f.readlines():
         t = line.strip().split("-")
@@ -17,19 +18,13 @@ print(seed_com)
 for i in pos:
     t = set(typ[i])
     print(t)
-    seed_com = seed_com & t
-'''
-for n,t in typ.items():
-    t = t.split(' ')
-    seed_com = seed_com & set(t)'''
-types = list(seed_com)
-print(types)
-print(f"the original length of types: {len(types)}")
+    seed_com = seed_com & t#get seed type
 
-#filter the initial candidate types
+#generate the initial candidates types by the intersection operation
 types = list(seed_com)
-concept = {}
+concept = {}#key is upper class index, value is sub-class index
 typename = []
+#index-type
 with open("./yago/NodeType.txt", "r") as f:
     for line in f.readlines():
         t = line.strip().split('\t')
@@ -44,23 +39,22 @@ with open("./yago/concept.txt", "r") as f:
             if t[0] in typename:
                 concept[int(typename.index(t[1])+1)].append(int(typename.index(t[0])+1))
 
+#filter the initial candidates types with the concept hierarchy structure
 for t in types:
-    print(t)
     if int(t) in concept.keys():
-        print(True)
         if len(concept[int(t)])>0:
-            print(True)
             for j in concept[int(t)]:
                 if str(j) in types:
                     types.remove(t)
 print(f"the ultimate length of types: {len(types)}")
 
+#extract candidate entities of satisfying the ultimate candidates types
 canout = open("./seed/actor/candidate.txt", "w")
 can = []
-for n,t in typ.items():
+for e,t in typ.items():
     if types[0] in t:
-        can.append(n)
-        print(n, sep='', file=canout)
+        can.append(e)
+        print(e, sep='', file=canout)
 
 
 
