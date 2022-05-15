@@ -14,12 +14,10 @@ def get_order(path_weight, seed, can, x, rel, rel_st, triple, start, end, pma):
             for k in path_weight:
                 flag = 0#path contains candidate and seed or not
                 if k not in pma:
-                    matrix = pathmatrix(k, merge, seed_set, rel, rel_st, triple)
+                    matrix = pathmatrix(k, merge, seed_set, rel, rel_st, triple)#based on path linking, relation seed can
                     start[k] = matrix[0]#startlist
                     end[k] = matrix[1]#endlist
                     pma[k] = matrix[2]#matrix
-                '''if (can[i] in start[k]) and (seed[j] in end[k]):
-                    flag = pma[k][start[k].index(can[i]), end[k].index(seed[i])]#have relation'''
                 if (can[i] in end[k]) and (seed[j] in start[k]):
                     flag = pma[k][start[k].index(seed[j]), end[k].index(can[i])]#have relation
                 if flag != 0:
@@ -29,7 +27,7 @@ def get_order(path_weight, seed, can, x, rel, rel_st, triple, start, end, pma):
         canord[can[i]] = cs
 
     orderlist = sorted(canord.items(), key=lambda x:x[1], reverse=True)
-    print(orderlist)
+    #print(orderlist)
     return orderlist, start, end
 
 

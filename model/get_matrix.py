@@ -1,4 +1,3 @@
-import numpy as np
 from scipy.sparse import coo_matrix
 
 def pathmatrix(path, merge, seed, rel, rel_st, triple):#rel key is relid, value is source
@@ -77,7 +76,8 @@ def pathmatrix(path, merge, seed, rel, rel_st, triple):#rel key is relid, value 
         m3data = []
         for i in range(len(list3)):
             for j in range(len(list4)):
-                if (list3[i]+'_'+tmp[2]+'_'+list4[j]) in triple:
+                if (list3[i]+'_'+tmp[2]+''
+                                        '_'+list4[j]) in triple:
                     m3row.append(i)
                     m3col.append(j)
                     m3data.append(1)
