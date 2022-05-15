@@ -51,5 +51,5 @@ class treenode:
 
 
 if __name__=="__main__":
-    n = item(1, 9, 0.8758)
+    n = items(1, 9, 0.8758, list())
     tree = treenode(1, 1.7, 2)
