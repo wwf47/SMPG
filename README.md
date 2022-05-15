@@ -43,7 +43,13 @@ This method show in `get_candidate.py`. It is used to obtain the candidates base
 ### Seed-Based Meta Path Generation
 <p align="center">
   <img src="https://github.com/wwf47/SMPG/blob/main/figure/path.jpg"/ width=600>
-</p>  
+</p>
+
+* Treenode edge is link(get_tree.py)
+* Get seed pair
+* judges whether the link is in the set of the given link type, whether the neighbor node isn’t visited before.
+* Choose the tree node with max number of source set
+* Choose the tree node with min number of tuples
 
 ### Combination of Meta Path
 
