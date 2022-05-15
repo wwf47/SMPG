@@ -21,13 +21,11 @@ Available datasets are:
     software
     movie
     scientist
- 
 ## Requirements
 The codebase is implemented in Python 3.6. Required packages are:
 
     numpy    1.19.5
-    tqdm     4.62.3
-    
+    tqdm     4.62.3  
 ## The Proposed Method
 ### Candidate Entities Extraction
 <p align="center">
