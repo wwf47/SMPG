@@ -14,7 +14,7 @@ class Node:
         return self.corrlink
 
 def build_graph(data_dir):
-    node_set = {}
+    node_set = {}#key is nodeid, value is Treenode
 
     with open(f"{data_dir}/NodeNames.txt", "r") as f:
         for line in tqdm(f.readlines(), desc="Nodeset"):
