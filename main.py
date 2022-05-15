@@ -23,15 +23,19 @@ def init_args():
 
 if __name__=='__main__':
     args = init_args()
+    #get positive and candidate
     pos, can = get_seeds("data/seed", args.seed)
     rel, rel_st, triple = get_links("data/yago")
+    #Create a tree structure to store entity information and relationship information
     graph = build_graph("data/yago")
     node = get_node(graph)
-    x = 2#seed number
+    x = 3#seed number
     value = x * (x - 1) / 2 + 1#predefined threshold value
+    pathnum = 10  # the num of the found metapath
+    treedeep = 4
+    treecount = 200
 
-    i, flag = 0, 2
-    sum_time = 0
+    i, flag = 0, 3
     start = {}
     end = {}
     pma = {}
@@ -42,9 +46,9 @@ if __name__=='__main__':
     endset = set()
 
     for i in range(len(pos)-flag+1):
-        seed = (pos[i:i+2])
+        seed = (pos[i:i+3])
         print("######Begin to get metapath and weight######")
-        pw = findpath(seed, node, value, x)
+        pw = findpath(graph, seed, value,pathnum, treedeep, x, treecount)
         print("######Begin to order the candidates######")
         order, s1, e1 = get_order(pw[0], seed, can, x, rel, rel_st, triple, start, end, pma)
         res = eval(order, pos)
@@ -54,15 +58,10 @@ if __name__=='__main__':
         MAP.append(res[3])
         endset = endset|res[4]
         i += x
-    prenum = len(endset & set(pos))
 
     print(f"max, min, mean, variance of p@30: {str(max(p1))}, {str(min(p1))}, {str(np.mean(p1))}, {str(np.var(p1))}")
     print(f"max, min, mean, variance of p@60: {str(max(p2))}, {str(min(p2))}, {str(np.mean(p2))}, {str(np.var(p2))}")
     print(f"max, min, mean, variance of p@90: {str(max(p3))}, {str(min(p3))}, {str(np.mean(p3))}, {str(np.var(p3))}")
-    print(f"correct num: {str(prenum)}")
-    print(f"precision: {str(float(prenum)/len(endset))}")
-    print(f"recall: {str(float(prenum)/len(pos))}")
-
 
 
 

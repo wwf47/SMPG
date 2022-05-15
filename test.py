@@ -3,17 +3,20 @@ from model.get_path import findpath
 from dataset import get_node, get_links, get_seeds
 from model.get_graph import build_graph
 from model.order import get_order
-seed = ['1', '5']
-x = 2
+seed = ['1', '5', '6']
+x = 3
 value = x * (x - 1) / 2 + 1
+pathnum = 10
+treedeep =4
+treecount = 200
 can = ['1', '2', '3', '4', '5']
 start = {}
 end = {}
 pma = {}
-rel, rel_st, triple = get_links("data/test")
-graph = build_graph("data/test")
+rel, rel_st, triple = get_links("./data/test")
+graph = build_graph("./data/test")
 node = get_node(graph)
-pw = findpath(seed, node, value, x)
+pw = findpath(graph, seed, value, pathnum, treedeep, x, treecount)
 
 class TestCase(unittest.TestCase):
     def test_path(self):
@@ -22,7 +25,6 @@ class TestCase(unittest.TestCase):
         order, s1, e1 = get_order(pw[0], seed, can, x, rel, rel_st, triple, start, end, pma)
         order_len = len(order)
         self.assertEqual(5, order_len)
-
 
 def suite():
     tests = []
