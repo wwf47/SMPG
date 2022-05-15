@@ -9,7 +9,7 @@ value = x * (x - 1) / 2 + 1
 pathnum = 10
 treedeep =4
 treecount = 200
-can = ['1', '2', '3', '4', '5']
+can = ['1', '2', '3', '4', '5', '6']
 start = {}
 end = {}
 pma = {}
@@ -24,7 +24,7 @@ class TestCase(unittest.TestCase):
     def test_order(self):
         order, s1, e1 = get_order(pw[0], seed, can, x, rel, rel_st, triple, start, end, pma)
         order_len = len(order)
-        self.assertEqual(5, order_len)
+        self.assertEqual(6, order_len)
 
 def suite():
     tests = []

@@ -13,15 +13,10 @@ def init_args():
     parser.add_argument("--seed", default="actor", type=str)
     args = parser.parse_args()
 
-    out_dir = f"./outputs"
-    if not os.path.exists(out_dir):
-        os.mkdir(out_dir)
-    args.output_dir = out_dir
-
     return args
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     args = init_args()
     #get positive and candidate
     pos, can = get_seeds("data/seed", args.seed)
@@ -31,9 +26,9 @@ if __name__=='__main__':
     node = get_node(graph)
     x = 3#seed number
     value = x * (x - 1) / 2 + 1#predefined threshold value
-    pathnum = 10  # the num of the found metapath
+    pathnum = 10#the num of the found metapath
     treedeep = 4
-    treecount = 200
+    treecount = 200#the count of expansion of the tree
 
     i, flag = 0, 3
     start = {}
@@ -62,6 +57,7 @@ if __name__=='__main__':
     print(f"max, min, mean, variance of p@30: {str(max(p1))}, {str(min(p1))}, {str(np.mean(p1))}, {str(np.var(p1))}")
     print(f"max, min, mean, variance of p@60: {str(max(p2))}, {str(min(p2))}, {str(np.mean(p2))}, {str(np.var(p2))}")
     print(f"max, min, mean, variance of p@90: {str(max(p3))}, {str(min(p3))}, {str(np.mean(p3))}, {str(np.var(p3))}")
+    print(f"max, min, mean, value of  MAP: {str(max(MAP)) + ',' + str(min(MAP)) + ',' + str(np.mean(MAP))}")
 
 
 
