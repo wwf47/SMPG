@@ -15,12 +15,13 @@ with open("./yago/Type-NodeTable.txt", "r") as f:
 ts = typ[pos[0]]
 seed_com = set(ts)
 print(seed_com)
+#generate the initial candidates types by the intersection operation
 for i in pos:
     t = set(typ[i])
     print(t)
     seed_com = seed_com & t#get seed type
 
-#generate the initial candidates types by the intersection operation
+#filter the initial candidates types with the concept hierarchy structure
 types = list(seed_com)
 concept = {}#key is upper class index, value is sub-class index
 typename = []
@@ -39,10 +40,9 @@ with open("./yago/concept.txt", "r") as f:
             if t[0] in typename:
                 concept[int(typename.index(t[1])+1)].append(int(typename.index(t[0])+1))
 
-#filter the initial candidates types with the concept hierarchy structure
 for t in types:
-    if int(t) in concept.keys():
-        if len(concept[int(t)])>0:
+    if int(t) in concept:
+        if len(concept[int(t)])>0:#have sub-class
             for j in concept[int(t)]:
                 if str(j) in types:
                     types.remove(t)
