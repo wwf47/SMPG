@@ -6,7 +6,7 @@ This codebase contains implementation of the paper:
 > Springer, Cham, 2017.
 > [[Paper]](https://link.springer.com/chapter/10.1007/978-3-319-57454-7_25)
 
-## Test samples
+## Test cases
 <p align="center">
   <img src="https://github.com/wwf47/SMPG/blob/main/figure/testcase.jpg"/ width=200>
 </p>
