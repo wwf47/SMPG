@@ -54,4 +54,4 @@ The goal is to automatically discover meta paths between seeds, shown in `get_pa
 ### Combination of Meta Path
 
 * Get the weight of meta path using heuristic weight learning method, shown in `get_path.py`.
-* combine meta paths to get the following ranking model, shown in `get_tree.py`.
+* combine meta paths to get the following ranking model, shown in `order.py`.
