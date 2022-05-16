@@ -1,6 +1,6 @@
 from scipy.sparse import coo_matrix
 
-def pathmatrix(path, merge, seed, rel, rel_st, triple):#rel key is relid, value is source
+def path_matrix(path, merge, seed, rel, rel_st, triple):#rel key is rel_id, value is source
     set2 = set()
     #triple = triple[:100]
     tmp = path.strip().split('_')
