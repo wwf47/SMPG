@@ -182,8 +182,6 @@ def find_path(graph, seed, value, path_num, tree_deep, seed_num, tree_count):
         first = 0
 
         print(f"This step cost time: {cost_time}")
-        '''if mini_item[0] < 0:
-            break'''
 
     end = time.time()
     sum_time = end - t1
