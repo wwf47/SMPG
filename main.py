@@ -38,7 +38,7 @@ if __name__ == '__main__':
     p1 = []
     p2 = []
     p3 = []
-    MAPs = []
+    MAP = []
     end_set = set()
 
     for i in range(len(pos)-flag+1):
@@ -51,7 +51,7 @@ if __name__ == '__main__':
         p1.append(res[0])
         p2.append(res[1])
         p3.append(res[2])
-        MAPs.append(res[3])
+        MAP.append(res[3])
         end_set = end_set | res[4]
         i += seed_num
 
