@@ -1,5 +1,6 @@
 from model.get_graph import build_graph
 
+
 def get_seeds(data_path, seed):
     pos = []
     can = []
@@ -15,6 +16,7 @@ def get_seeds(data_path, seed):
     print(f"the length of positive entity: {str(len(pos))}")
     print(f"the length of candidate entity: {str(len(can))}")
     return pos, can
+
 
 def get_links(data_path):
     link_dict = {}#key is link and value is sourced node,all keys include link 8 and link -8
@@ -47,11 +49,12 @@ def get_links(data_path):
     print("the length of triple:" + str(len(rec)))
     return link_dict, link_st, rec
 
-def get_node(graph):
+
+def get_node(graphs):
     node_link = {}  # key is node and value is dict(key is link connecting node and value is node )
-    for i in graph:
+    for i in graphs:
         rel = {}#key is rel_id and value is list of target node
-        for j in graph[i].link:
+        for j in graphs[i].link:
             arr = j.strip().split('_')
             if arr[1] not in rel:
                 rel[arr[1]] = []
@@ -63,7 +66,7 @@ def get_node(graph):
 if __name__ == '__main__':
     data_dir = "data/test"
     seeds = "actor"
-    #p, c = get_seeds(data_dir, seeds)
+    # p, c = get_seeds(data_dir, seeds)
     a, b, d = get_links(data_dir)
     graph = build_graph(data_dir)
     node = get_node(graph)

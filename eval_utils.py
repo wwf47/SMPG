@@ -1,48 +1,50 @@
 from fractions import Fraction
-def eval(order, pos):#(candidate, probability)
-    prec30 = 0
-    prec60 = 0
-    prec90 = 0
-    P30 = 0
-    P60 = 0
-    P90 = 0
+
+
+def eval_can(order, pos):  # (candidate, probability)
+    pre30 = 0
+    pre60 = 0
+    pre90 = 0
+    p30 = 0
+    p60 = 0
+    p90 = 0
     order_set = set()
-    for c, p in order:#candidate, probability
+    for c, p in order:  # candidate, probability
         if p > 0:
             order_set.add(c)
     for i in range(30):
         if order[i][0] in pos:
-            prec30 += 1#correct
-            P30 = Fraction(prec30, (i+1))+P30#pre@i
-    if prec30 == 0:
-        AP30 = 0
+            pre30 += 1  # correct
+            p30 = Fraction(pre30, (i+1))+p30  # pre@i
+    if pre30 == 0:
+        ap30 = 0
     else:
-        AP30 = P30/prec30#sum of pre@i/correct instances
+        ap30 = p30/pre30  # sum of pre@i\correct instances
     for i in range(30,60):
         if order[i][0] in pos:
-            prec60 += 1
-            P60 = Fraction(prec60+prec30, (i+1))+P60
-    prec60 += prec30
-    if prec60 == 0:
-        AP60 = 0
+            pre60 += 1
+            p60 = Fraction(pre60+pre30, (i+1))+p60
+    pre60 += pre30
+    if pre60 == 0:
+        ap60 = 0
     else:
-        AP60 = (P60+P30)/prec60
+        ap60 = (p60+p30)/pre60
     for i in range(60,90):
         if order[i][0] in pos:
-            prec90 += 1
-            P90 = Fraction(prec90+prec60+prec30, (i+1))+P90
-    prec90 += prec60
-    if prec90 == 0:
-        AP90 = 0
+            pre90 += 1
+            p90 = Fraction(pre90+pre60+pre30, (i+1))+p90
+    pre90 += pre60
+    if pre90 == 0:
+        ap90 = 0
     else:
-        AP90 = (P90+P60+P30)/prec90
-    MAP = (AP30+AP60+AP90)/3
+        ap90 = (p90+p60+p30)/pre90
+    maps = (ap30+ap60+ap90)/3
 
-    prec30 /= float(30)#pre@30/num
-    prec60 /= float(60)
-    prec90 /= float(90)
+    pre30 /= float(30)  # pre@30/num
+    pre60 /= float(60)
+    pre90 /= float(90)
 
-    return prec30, prec60, prec90, MAP, order_set
+    return pre30, pre60, pre90, maps, order_set
 
 
 
