@@ -1,11 +1,11 @@
 pos = []
-typ = {}#key is entity index, value is type(in KG)
-#obtain entity types of each seed
+typ = {}  # key is entity index, value is type(in KG)
+# obtain entity types of each seed
 with open("./seed/actor/positive.txt", "r") as f:
     for line in f.readlines():
         t = line.strip()
         pos.append(t)
-#type-entity
+# type-entity
 with open("./yago/Type-NodeTable.txt", "r") as f:
     for line in f.readlines():
         t = line.strip().split("-")
@@ -15,17 +15,17 @@ with open("./yago/Type-NodeTable.txt", "r") as f:
 ts = typ[pos[0]]
 seed_com = set(ts)
 print(seed_com)
-#generate the initial candidates types by the intersection operation
+# generate the initial candidates types by the intersection operation
 for i in pos:
     t = set(typ[i])
     print(t)
     seed_com = seed_com & t#get seed type
 
-#filter the initial candidates types with the concept hierarchy structure
+# filter the initial candidates types with the concept hierarchy structure
 types = list(seed_com)
-concept = {}#key is upper class index, value is sub-class index
+concept = {}  # key is upper class index, value is sub-class index
 typename = []
-#index-type
+# index-type
 with open("./yago/NodeType.txt", "r") as f:
     for line in f.readlines():
         t = line.strip().split('\t')
@@ -42,19 +42,19 @@ with open("./yago/concept.txt", "r") as f:
 
 for t in types:
     if int(t) in concept:
-        if len(concept[int(t)])>0:#have sub-class
+        if len(concept[int(t)])>0:  # have sub-class
             for j in concept[int(t)]:
                 if str(j) in types:
                     types.remove(t)
 print(f"the ultimate length of types: {len(types)}")
 
-#extract candidate entities of satisfying the ultimate candidates types
-canout = open("./seed/actor/candidate.txt", "w")
+# extract candidate entities of satisfying the ultimate candidates types
+can_out = open("./seed/actor/candidate.txt", "w")
 can = []
-for e,t in typ.items():
+for e, t in typ.items():
     if types[0] in t:
         can.append(e)
-        print(e, sep='', file=canout)
+        print(e, sep='', file=can_out)
 
 
 
